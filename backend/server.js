@@ -13,6 +13,8 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
+app.use('/api/auth', require('./routes/auth'));
+
 app.get('/api/health', (req, res) => {
   sendResponse(res, 200, true, { status: 'ok' }, 'Server is running');
 });
