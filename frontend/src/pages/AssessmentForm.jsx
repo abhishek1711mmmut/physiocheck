@@ -205,7 +205,7 @@ export default function AssessmentForm() {
         {/* Common Fields */}
         <div className="bg-white p-6 rounded-lg shadow">
           <h2 className="text-lg font-semibold mb-4">Patient Information</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
               <input type="text" value={commonFields.patientName} readOnly
@@ -220,12 +220,6 @@ export default function AssessmentForm() {
               <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
               <input type="text" value={commonFields.gender} readOnly
                 className="w-full px-3 py-2 border rounded-lg bg-gray-50 text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Diagnosis</label>
-              <input type="text" value={commonFields.diagnosis}
-                onChange={(e) => setCommonFields(prev => ({ ...prev, diagnosis: e.target.value }))}
-                className="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 mt-4">
@@ -308,6 +302,15 @@ export default function AssessmentForm() {
             </div>
           </div>
         )}
+
+        {/* Diagnosis */}
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h2 className="text-lg font-semibold mb-4">Diagnosis</h2>
+          <textarea rows={2} value={commonFields.diagnosis}
+            onChange={(e) => setCommonFields(prev => ({ ...prev, diagnosis: e.target.value }))}
+            placeholder="Enter diagnosis based on assessment findings..."
+            className="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
 
         {/* Problem List */}
         <div className="bg-white p-6 rounded-lg shadow">

@@ -1,5 +1,13 @@
 import jsPDF from 'jspdf';
 
+function formatDate(dateStr) {
+  return new Date(dateStr).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
+}
+
 export function generatePDF(assessment) {
   const doc = new jsPDF();
   let y = 20;
@@ -49,7 +57,7 @@ export function generatePDF(assessment) {
   doc.setFont(undefined, 'normal');
   doc.text(`${assessment.specialtyName} Assessment`, margin, y);
   y += 6;
-  doc.text(`Date: ${new Date(assessment.date).toLocaleDateString()}`, margin, y);
+  doc.text(`Date: ${formatDate(assessment.date)}`, margin, y);
   y += 10;
 
   // Patient Info
