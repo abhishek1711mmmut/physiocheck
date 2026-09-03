@@ -44,10 +44,7 @@ export default function AllPatients() {
                   <span className="font-medium">{p.name}</span>
                   <span className="text-gray-500 ml-3">{p.age}y, {p.gender}</span>
                 </div>
-                <div className="text-right">
-                  <span className="text-gray-500 text-sm">{p.diagnosis || 'No diagnosis'}</span>
-                  <span className="text-gray-400 text-sm ml-3">{formatDate(p.date)}</span>
-                </div>
+                <span className="text-gray-400 text-sm">{formatDate(p.date)}</span>
               </div>
             </Link>
           ))}

@@ -33,7 +33,7 @@ export default function AssessmentForm() {
           patientName: patRes.data.data.name,
           age: patRes.data.data.age,
           gender: patRes.data.data.gender,
-          diagnosis: patRes.data.data.diagnosis || '',
+          diagnosis: '',
           vas: '',
           nprs: ''
         });

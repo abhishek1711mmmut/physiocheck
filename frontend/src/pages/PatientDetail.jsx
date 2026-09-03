@@ -59,7 +59,6 @@ export default function PatientDetail() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
           <div><span className="text-gray-500">Age:</span> {patient.age}</div>
           <div><span className="text-gray-500">Gender:</span> {patient.gender}</div>
-          <div><span className="text-gray-500">Diagnosis:</span> {patient.diagnosis || 'N/A'}</div>
           <div><span className="text-gray-500">Date:</span> {formatDate(patient.date)}</div>
         </div>
       </div>

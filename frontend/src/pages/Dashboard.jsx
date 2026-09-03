@@ -56,7 +56,6 @@ export default function Dashboard() {
                   <span className="font-medium">{p.name}</span>
                   <span className="text-gray-500 ml-3">{p.age}y, {p.gender}</span>
                 </div>
-                <span className="text-gray-500 text-sm">{p.diagnosis || 'No diagnosis'}</span>
               </div>
             </Link>
           ))}

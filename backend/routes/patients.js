@@ -7,10 +7,10 @@ const router = express.Router();
 
 router.post('/', auth, async (req, res) => {
   try {
-    const { name, age, gender, diagnosis } = req.body;
+    const { name, age, gender } = req.body;
     const patient = await Patient.create({
       therapistId: req.user.id,
-      name, age, gender, diagnosis
+      name, age, gender
     });
     sendResponse(res, 201, true, patient, 'Patient created successfully');
   } catch (err) {
