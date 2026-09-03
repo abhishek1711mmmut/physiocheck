@@ -195,7 +195,7 @@ export default function AssessmentForm() {
     }
   };
 
-  if (loading) return <div className="text-center py-10">Loading...</div>;
+  if (loading) return <div className="text-center py-10"></div>;
   if (!specialty || !patient) return <div className="text-center py-10">Not found</div>;
 
   return (

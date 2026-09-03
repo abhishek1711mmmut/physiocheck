@@ -28,7 +28,7 @@ export default function PatientDetail() {
     fetchData();
   }, [id]);
 
-  if (loading) return <div className="text-center py-10">Loading...</div>;
+  if (loading) return <div className="text-center py-10"></div>;
   if (!patient) return <div className="text-center py-10">Patient not found</div>;
 
   const sortedAssessments = [...assessments].sort((a, b) => new Date(a.date) - new Date(b.date));

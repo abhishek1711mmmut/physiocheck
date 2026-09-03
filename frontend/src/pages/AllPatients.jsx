@@ -31,7 +31,7 @@ export default function AllPatients() {
       </div>
 
       {loading ? (
-        <p>Loading...</p>
+        <div></div>
       ) : patients.length === 0 ? (
         <p className="text-gray-500 bg-white p-6 rounded-lg shadow">No patients yet. Create your first patient.</p>
       ) : (

@@ -23,7 +23,7 @@ export default function AssessmentDetail() {
     fetchAssessment();
   }, [assessmentId]);
 
-  if (loading) return <div className="text-center py-10">Loading...</div>;
+  if (loading) return <div className="text-center py-10"></div>;
   if (!assessment) return <div className="text-center py-10">Assessment not found</div>;
 
   const { commonFields, findings, specialTestResults, outcomeScores, notes } = assessment;

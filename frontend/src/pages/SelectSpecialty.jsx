@@ -22,7 +22,7 @@ export default function SelectSpecialty() {
     fetchSpecialties();
   }, []);
 
-  if (loading) return <div className="text-center py-10">Loading...</div>;
+  if (loading) return <div className="text-center py-10"></div>;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
