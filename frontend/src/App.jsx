@@ -5,6 +5,8 @@ import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import NewPatient from './pages/NewPatient';
+import PatientDetail from './pages/PatientDetail';
 
 function App() {
   return (
@@ -14,10 +16,13 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={
-            <ProtectedRoute>
-              <Navbar />
-              <Dashboard />
-            </ProtectedRoute>
+            <ProtectedRoute><Navbar /><Dashboard /></ProtectedRoute>
+          } />
+          <Route path="/patients/new" element={
+            <ProtectedRoute><Navbar /><NewPatient /></ProtectedRoute>
+          } />
+          <Route path="/patients/:id" element={
+            <ProtectedRoute><Navbar /><PatientDetail /></ProtectedRoute>
           } />
           <Route path="/" element={<Navigate to="/dashboard" />} />
         </Routes>
