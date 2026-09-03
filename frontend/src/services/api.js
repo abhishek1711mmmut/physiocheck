@@ -5,22 +5,30 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api'
 });
 
+let activeRequests = 0;
+const TOAST_ID = 'api-loading';
+
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
-  config._toastId = toast.loading('Loading...');
+  activeRequests++;
+  if (activeRequests === 1) {
+    toast.loading('Loading...', { id: TOAST_ID });
+  }
   return config;
 });
 
 api.interceptors.response.use(
   (response) => {
-    toast.dismiss(response.config._toastId);
+    activeRequests--;
+    if (activeRequests === 0) toast.dismiss(TOAST_ID);
     return response;
   },
   (error) => {
-    toast.dismiss(error.config?._toastId);
+    activeRequests--;
+    if (activeRequests === 0) toast.dismiss(TOAST_ID);
     return Promise.reject(error);
   }
 );
