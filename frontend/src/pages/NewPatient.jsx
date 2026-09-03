@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import api from '../services/api';
 
 export default function NewPatient() {
   const [form, setForm] = useState({ name: '', age: '', gender: '' });
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -14,11 +16,17 @@ export default function NewPatient() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setLoading(true);
     try {
       const res = await api.post('/patients', { ...form, age: Number(form.age) });
+      toast.success('Patient created successfully');
       navigate(`/patients/${res.data.data._id}`);
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to create patient');
+      const msg = err.response?.data?.message || 'Failed to create patient';
+      setError(msg);
+      toast.error(msg);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -47,8 +55,9 @@ export default function NewPatient() {
             <option value="Other">Other</option>
           </select>
         </div>
-        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 cursor-pointer">
-          Create Patient
+        <button type="submit" disabled={loading}
+          className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 cursor-pointer disabled:bg-gray-400">
+          {loading ? 'Creating...' : 'Create Patient'}
         </button>
       </form>
     </div>

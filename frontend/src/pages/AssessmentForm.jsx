@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import api from '../services/api';
 
 export default function AssessmentForm() {
@@ -129,9 +130,10 @@ export default function AssessmentForm() {
         },
         notes
       });
+      toast.success('Assessment saved successfully');
       navigate(`/patients/${patientId}/assessments/${assessment.data.data._id}`);
     } catch (err) {
-      console.error('Failed to save assessment');
+      toast.error(err.response?.data?.message || 'Failed to save assessment');
     } finally {
       setSubmitting(false);
     }
