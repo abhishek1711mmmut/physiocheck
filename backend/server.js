@@ -14,6 +14,7 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch(err => console.error('MongoDB connection error:', err));
 
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/patients', require('./routes/patients'));
 
 app.get('/api/health', (req, res) => {
   sendResponse(res, 200, true, { status: 'ok' }, 'Server is running');
