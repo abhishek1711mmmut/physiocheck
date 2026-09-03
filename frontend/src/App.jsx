@@ -1,9 +1,28 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import Navbar from './components/Navbar';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
+
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <h1 className="text-3xl font-bold text-center py-10">PhysioCheck</h1>
-      <p className="text-center text-gray-600">Physiotherapy Digital Assessment System</p>
-    </div>
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <Navbar />
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/" element={<Navigate to="/dashboard" />} />
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
