@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
+import { formatDate } from '../utils/formatDate';
 
-export default function Dashboard() {
-  const { user } = useAuth();
+export default function AllPatients() {
   const [patients, setPatients] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -25,30 +24,19 @@ export default function Dashboard() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Welcome, {user?.name}</h1>
+        <h1 className="text-2xl font-bold">All Patients ({patients.length})</h1>
         <Link to="/patients/new" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
           + New Patient
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h3 className="text-lg font-semibold text-gray-700">Total Patients</h3>
-          <p className="text-3xl font-bold text-blue-600 mt-2">{patients.length}</p>
-        </div>
-      </div>
-
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">Recent Patients</h2>
-        <Link to="/patients" className="text-blue-600 hover:underline text-sm">View All Patients</Link>
-      </div>
       {loading ? (
         <p>Loading...</p>
       ) : patients.length === 0 ? (
         <p className="text-gray-500 bg-white p-6 rounded-lg shadow">No patients yet. Create your first patient.</p>
       ) : (
         <div className="space-y-3">
-          {patients.slice(0, 5).map((p) => (
+          {patients.map((p) => (
             <Link key={p._id} to={`/patients/${p._id}`}
               className="block bg-white p-4 rounded-lg shadow hover:shadow-md">
               <div className="flex justify-between">
@@ -56,7 +44,10 @@ export default function Dashboard() {
                   <span className="font-medium">{p.name}</span>
                   <span className="text-gray-500 ml-3">{p.age}y, {p.gender}</span>
                 </div>
-                <span className="text-gray-500 text-sm">{p.diagnosis || 'No diagnosis'}</span>
+                <div className="text-right">
+                  <span className="text-gray-500 text-sm">{p.diagnosis || 'No diagnosis'}</span>
+                  <span className="text-gray-400 text-sm ml-3">{formatDate(p.date)}</span>
+                </div>
               </div>
             </Link>
           ))}

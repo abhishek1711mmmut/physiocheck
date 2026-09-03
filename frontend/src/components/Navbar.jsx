@@ -17,7 +17,7 @@ export default function Navbar() {
         {user && (
           <div className="flex items-center gap-4">
             <span className="text-gray-600">Hi, {user.name}</span>
-            <button onClick={handleLogout} className="text-red-500 hover:text-red-700">
+            <button onClick={handleLogout} className="text-red-500 hover:text-red-700 cursor-pointer">
               Logout
             </button>
           </div>

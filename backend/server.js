@@ -15,6 +15,8 @@ mongoose.connect(process.env.MONGODB_URI)
 
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/patients', require('./routes/patients'));
+app.use('/api/specialties', require('./routes/specialties'));
+app.use('/api/assessments', require('./routes/assessments'));
 
 app.get('/api/health', (req, res) => {
   sendResponse(res, 200, true, { status: 'ok' }, 'Server is running');
